@@ -38,18 +38,20 @@ chatBox.addEventListener('keyup', evt =>{
     }
 })
 
-socket.on('messageLogs', data=>{
-    let log = document.getElementById('messageLogs')
-    let messages = ''
-   
-    data.forEach(message => {
-        messages = messages+`${message.user} : ${message.message}</br>`
-       
+socket.on('messageLogs', data => {
+    let log = document.getElementById('messageLogs');
+    let messages = '';
+
+    // Obtener solo los últimos 8 mensajes
+    let lastMessages = data.slice(-8);
+
+    lastMessages.forEach(message => {
+        messages += `${message.user} : ${message.message}</br>`;
     });
 
-    
-    log.innerHTML = messages
-})
+    log.innerHTML = messages;
+});
+
 
 
 //Aca etsamos escuchando el servidor para lanzar nuestro logueo
